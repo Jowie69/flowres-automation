@@ -779,6 +779,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem clam
 </section>
 
 <!-- ══ HOW IT WORKS ══ -->
+
 <section id="flow">
   <div class="wrap" style="background:var(--bg2);border-top:1px solid var(--border)">
     <div class="rev">
@@ -1084,7 +1085,184 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem clam
     </div>
   </div>
 </section>
+ <!-- ══ LIMITED OFFER BANNER ══ -->
+<!-- INSERT THIS BLOCK JUST ABOVE <section id="flow"> in your index.html -->
 
+<div style="max-width:1280px;margin:0 auto;padding:0 clamp(1rem,5vw,4rem) 3rem;position:relative;z-index:1;">
+<style>
+.banner-wrap{border:1.5px solid #ff6b35;border-radius:12px;overflow:hidden;position:relative;background:var(--color-surface,#fff)}
+.banner-top{background:#ff6b35;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.banner-top-left{display:flex;align-items:center;gap:8px}
+.pulse-dot{width:8px;height:8px;border-radius:50%;background:#fff;animation:blink 1.1s step-end infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.banner-top-label{font-size:12px;font-weight:500;color:#fff;letter-spacing:.04em;text-transform:uppercase}
+.slots-badge{background:rgba(0,0,0,.25);color:#fff;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;letter-spacing:.03em}
+.banner-body{padding:24px 28px 20px}
+.offer-headline{font-size:22px;font-weight:700;color:#111;line-height:1.25;margin-bottom:6px}
+.offer-headline span{color:#ff6b35}
+.offer-sub{font-size:14px;color:#555;line-height:1.6;margin-bottom:20px;max-width:560px}
+.offer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.offer-card{background:#f9f9f9;border:0.5px solid #e0e0e0;border-radius:8px;padding:14px 16px}
+.offer-card-header{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.offer-icon{font-size:16px;width:16px;text-align:center}
+.offer-card-title{font-size:13px;font-weight:600;color:#111}
+.offer-card-desc{font-size:12px;color:#666;line-height:1.5;padding-left:24px}
+.strike{text-decoration:line-through;color:#999}
+.highlight{color:#ff6b35;font-weight:600}
+.apps-section{margin-bottom:20px}
+.apps-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#888;margin-bottom:8px}
+.apps-row{display:flex;flex-wrap:wrap;gap:8px}
+.app-chip{display:flex;align-items:center;gap:6px;background:#f9f9f9;border:0.5px solid #ddd;border-radius:20px;padding:5px 12px;text-decoration:none;font-size:12px;font-weight:500;color:#111;transition:border-color .15s}
+.app-chip:hover{border-color:#ff6b35;color:#ff6b35}
+.app-chip-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;flex-shrink:0}
+.scarcity-bar{margin:0 28px 16px}
+.scarcity-bar-label{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:5px}
+.bar-track{height:4px;background:#eee;border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;background:#ff6b35;width:0%;transition:width 1.2s ease}
+.banner-bottom{border-top:0.5px solid #e0e0e0;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.timer-block{display:flex;align-items:center;gap:10px}
+.timer-label{font-size:12px;color:#888}
+.timer-digits{display:flex;align-items:center;gap:4px}
+.timer-unit{background:#f9f9f9;border:0.5px solid #ddd;border-radius:8px;padding:4px 8px;text-align:center;min-width:36px}
+.timer-num{font-size:16px;font-weight:700;color:#ff6b35;font-variant-numeric:tabular-nums;display:block;line-height:1}
+.timer-tag{font-size:9px;color:#888;display:block;text-transform:uppercase;letter-spacing:.05em;margin-top:2px}
+.timer-sep{font-size:16px;font-weight:700;color:#bbb;line-height:1;margin-bottom:12px}
+.cta-buttons{display:flex;gap:10px;flex-wrap:wrap}
+.btn-primary{background:#ff6b35;color:#fff;border:none;border-radius:8px;padding:10px 20px;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s}
+.btn-primary:hover{opacity:.88}
+.btn-secondary{background:transparent;color:#111;border:0.5px solid #ddd;border-radius:8px;padding:10px 20px;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:border-color .15s}
+.btn-secondary:hover{border-color:#ff6b35;color:#ff6b35}
+</style>
+
+<div class="banner-wrap">
+  <div class="banner-top">
+    <div class="banner-top-left">
+      <div class="pulse-dot"></div>
+      <span class="banner-top-label">Limited-time offer — this month only</span>
+    </div>
+    <span class="slots-badge" id="slots-badge">3 of 5 slots taken this month</span>
+  </div>
+
+  <div class="banner-body">
+    <div class="offer-headline">Automate your business <span>+ get a free website</span> — this month only.</div>
+    <div class="offer-sub">Book a free call this month and get a professionally built web app at no extra cost — on top of your AI automation system. I only take 5 clients per month to keep quality high. 3 slots are already gone.</div>
+
+    <div class="offer-grid">
+      <div class="offer-card">
+        <div class="offer-card-header">
+          <div class="offer-icon">🤖</div>
+          <div class="offer-card-title">AI automation system</div>
+        </div>
+        <div class="offer-card-desc">Custom N8N, Zapier, or Make.com workflows — lead capture, CRM sync, AI agents, 24/7 booking.</div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-card-header">
+          <div class="offer-icon">🌐</div>
+          <div class="offer-card-title">Free web app — yours to keep</div>
+        </div>
+        <div class="offer-card-desc"><span class="strike">₱25,000+</span> value. A full web app like the live examples below — completely free when you book this month.</div>
+      </div>
+      <div class="offer-card">
+        <div class="offer-card-header">
+          <div class="offer-icon">⚡</div>
+          <div class="offer-card-title">Discounted system rate</div>
+        </div>
+        <div class="offer-card-desc">New clients this month lock in a <span class="highlight">discounted rate</span> on their automation system — locked in for future projects too.</div>
+      </div>
+    </div>
+
+    <div class="apps-section">
+      <div class="apps-label">Live web apps I've built — yours could be next</div>
+      <div class="apps-row">
+        <a class="app-chip" href="https://depedhub-ni-jowie.netlify.app/" target="_blank">
+          <div class="app-chip-dot"></div>DepEd Teacher Hub
+        </a>
+        <a class="app-chip" href="https://hirayahotel.onrender.com/" target="_blank">
+          <div class="app-chip-dot"></div>Hiraya Hotel &amp; Events
+        </a>
+        <a class="app-chip" href="https://thirdys-place.vercel.app/" target="_blank">
+          <div class="app-chip-dot"></div>Thirdy's Place Hostel
+        </a>
+        <a class="app-chip" href="https://project-vortex.netlify.app/dashboard" target="_blank">
+          <div class="app-chip-dot"></div>Project VORTEX
+        </a>
+        <a class="app-chip" href="https://project-deltfra.netlify.app/" target="_blank">
+          <div class="app-chip-dot"></div>DELTFRA
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scarcity-bar">
+    <div class="scarcity-bar-label">
+      <span>Slots remaining this month</span>
+      <span id="bar-label">2 left</span>
+    </div>
+    <div class="bar-track"><div class="bar-fill" id="bar-fill"></div></div>
+  </div>
+
+  <div class="banner-bottom">
+    <div class="timer-block">
+      <span class="timer-label">Offer closes in</span>
+      <div class="timer-digits">
+        <div class="timer-unit">
+          <span class="timer-num" id="t-d">00</span>
+          <span class="timer-tag">days</span>
+        </div>
+        <span class="timer-sep">:</span>
+        <div class="timer-unit">
+          <span class="timer-num" id="t-h">00</span>
+          <span class="timer-tag">hrs</span>
+        </div>
+        <span class="timer-sep">:</span>
+        <div class="timer-unit">
+          <span class="timer-num" id="t-m">00</span>
+          <span class="timer-tag">min</span>
+        </div>
+        <span class="timer-sep">:</span>
+        <div class="timer-unit">
+          <span class="timer-num" id="t-s">00</span>
+          <span class="timer-tag">sec</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-buttons">
+      <a class="btn-primary" href="https://calendly.com/jowieflores-freelancer/30min" target="_blank">
+        ⚡ Claim your free website — book now ↗
+      </a>
+      <a class="btn-secondary" href="https://wa.me/639394911140?text=Hi%20Jowie!%20I%20want%20to%20claim%20the%20free%20website%20offer." target="_blank">
+        💬 WhatsApp me →
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var now = new Date();
+  var endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0);
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function tick() {
+    var diff = Math.max(0, endOfMonth - new Date());
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('t-d').textContent = pad(d);
+    document.getElementById('t-h').textContent = pad(h);
+    document.getElementById('t-m').textContent = pad(m);
+    document.getElementById('t-s').textContent = pad(s);
+  }
+  tick();
+  setInterval(tick, 1000);
+  setTimeout(function() {
+    document.getElementById('bar-fill').style.width = '60%';
+  }, 200);
+})();
+</script>
+</div>
+<!-- ══ END BANNER ══ -->
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="foot-in">
@@ -1305,5 +1483,6 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){closeModal();closeBook();closeFounder()}
 });
 </script>
+
 </body>
 </html>
