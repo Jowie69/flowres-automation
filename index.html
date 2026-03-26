@@ -1859,5 +1859,113 @@ document.addEventListener('keydown',e=>{
   });
 })();
 </script>
+<!-- ══ BACKGROUND MUSIC ══ -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="bgmusic.mp3" type="audio/mpeg"/>
+</audio>
+
+<!-- Music toggle button -->
+<button id="music-btn" title="Toggle background music" style="
+  position:fixed;bottom:1.5rem;left:4rem;z-index:400;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--bg2);border:1px solid var(--border2);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--muted);font-size:.85rem;
+  transition:all .22s;opacity:0;pointer-events:none;
+">🎵</button>
+
+<script>
+(function(){
+  const audio = document.getElementById('bgMusic');
+  const btn   = document.getElementById('music-btn');
+  audio.volume = 0.5;
+
+  let userPaused = false; // true only when user manually clicks pause
+
+  // Show button after scroll (same logic as btt)
+  window.addEventListener('scroll', function(){
+    const vis = window.scrollY > 500;
+    btn.style.opacity    = vis ? '1'    : '0';
+    btn.style.pointerEvents = vis ? 'auto' : 'none';
+  }, { passive: true });
+
+  // Try autoplay; browsers may block it — falls back to first interaction
+  function tryPlay(){
+    audio.play().then(function(){
+      btn.textContent = '🎵';
+      btn.style.borderColor = 'rgba(0,255,179,.4)';
+      btn.style.color = 'var(--g1)';
+    }).catch(function(){ /* blocked — will retry on first user click */ });
+  }
+
+  // Unlock + start on first user interaction (required by browsers)
+  function unlockAudio(){
+    if(!userPaused && audio.paused) tryPlay();
+    document.removeEventListener('click', unlockAudio);
+    document.removeEventListener('touchstart', unlockAudio);
+  }
+  document.addEventListener('click',      unlockAudio, { once: true });
+  document.addEventListener('touchstart', unlockAudio, { once: true });
+
+  // Toggle button
+  btn.addEventListener('click', function(e){
+    e.stopPropagation(); // don't re-fire unlockAudio
+    if(audio.paused){
+      userPaused = false;
+      tryPlay();
+    } else {
+      userPaused = true;
+      audio.pause();
+      btn.textContent = '🔇';
+      btn.style.borderColor = 'var(--border2)';
+      btn.style.color = 'var(--muted)';
+    }
+  });
+
+  // ── Auto-pause when a video plays, resume when it ends/pauses ──
+  function getAllVideos(){
+    return document.querySelectorAll('video');
+  }
+
+  // Watch for videos added dynamically (modal injects them)
+  const bodyObserver = new MutationObserver(function(){
+    getAllVideos().forEach(attachVideoListeners);
+  });
+  bodyObserver.observe(document.body, { childList:true, subtree:true });
+
+  const listenedVideos = new WeakSet();
+  function attachVideoListeners(vid){
+    if(listenedVideos.has(vid)) return;
+    listenedVideos.add(vid);
+
+    vid.addEventListener('play', function(){
+      if(!audio.paused){
+        audio.pause();
+        // mark as video-paused, not user-paused
+        btn.textContent = '⏸';
+      }
+    });
+
+    ['pause','ended'].forEach(function(ev){
+      vid.addEventListener(ev, function(){
+        // Only resume if user hasn't manually turned music off
+        if(!userPaused){
+          // Small delay so video pause UI settles first
+          setTimeout(function(){
+            const anyPlaying = Array.from(getAllVideos()).some(function(v){ return !v.paused; });
+            if(!anyPlaying) tryPlay();
+          }, 300);
+        }
+      });
+    });
+  }
+
+  // Attach to any videos already in the DOM
+  getAllVideos().forEach(attachVideoListeners);
+
+  // Attempt autoplay immediately (works if user already interacted)
+  tryPlay();
+})();
+</script>
 </body>
 </html>
