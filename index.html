@@ -553,7 +553,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem clam
       <div class="hero-stats">
         <div class="hstat"><span class="hstat-n">24/7</span><span class="hstat-l">Systems running live</span></div>
         <div class="hstat"><span class="hstat-n">500h</span><span class="hstat-l">Saved / Month</span></div>
-        <div class="hstat"><span class="hstat-n">10+</span><span class="hstat-l">Production Workflows</span></div>
+        <div class="hstat"><span class="hstat-n">0+</span><span class="hstat-l">Production Workflows</span></div>
       </div>
     </div>
     <div class="hero-vis rev">
@@ -1288,8 +1288,8 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem clam
 <div id="book-modal" onclick="closeBookOnBg(event)">
   <div class="book-box">
     <div class="modal-close" onclick="closeBook()" style="position:absolute;top:1rem;right:1rem">✕</div>
-    <div class="book-title">Book a Free Call</div>
-    <div class="book-sub">30 minutes. No pitch. Just a clear conversation about your automation needs. Choose how you'd like to connect:</div>
+    <div class="book-title">Let’s Build Your Vision! 🚀</div>
+    <div class="book-sub">Book your Free Discovery Call now! Hire me this month to unlock a FREE high-performance website and a special early-bird discount. Don't wait—spots for this offer are strictly limited! Choose how you'd like to connect:</div>
     <div class="book-options">
       <a href="https://calendly.com/jowieflores-freelancer/30min" target="_blank" class="book-opt bo-cal" onclick="closeBook()">
         <div class="book-opt-icon">📅</div>
@@ -1482,6 +1482,382 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){closeModal();closeBook();closeFounder()}
 });
 </script>
+<!-- ══ GIFT POPUP MODAL v2 (with minimized state) ══ -->
+<!-- Paste the CSS inside your existing <style> tag -->
+<style id="gift-popup-styles">
+/* ── MINIMIZED TAB (always visible after first show) ── */
+#gift-tab {
+  position: fixed;
+  bottom: 5.5rem;
+  right: 1.5rem;
+  z-index: 1499;
+  display: none; /* hidden until popup has been shown once */
+  align-items: center;
+  gap: .5rem;
+  background: var(--grad);
+  color: #07071a;
+  font-family: var(--fm);
+  font-weight: 800;
+  font-size: .75rem;
+  padding: .6rem 1.1rem .6rem .85rem;
+  border-radius: 40px;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 6px 28px rgba(0,255,179,.35), 0 0 0 0 rgba(0,255,179,.3);
+  animation: tab-pulse 3s ease-in-out infinite;
+  transition: transform .2s, box-shadow .2s;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+#gift-tab.visible { display: flex; }
+#gift-tab:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 36px rgba(0,255,179,.5);
+}
+@keyframes tab-pulse {
+  0%,100% { box-shadow: 0 6px 28px rgba(0,255,179,.35), 0 0 0 0 rgba(0,255,179,.25); }
+  50%      { box-shadow: 0 6px 28px rgba(0,255,179,.35), 0 0 0 10px rgba(0,255,179,.0); }
+}
+.gift-tab-emoji { font-size: 1rem; animation: gp-bounce 2.2s ease-in-out infinite; }
+.gift-tab-text  { line-height: 1; }
 
+/* ── FULL POPUP ── */
+#gift-popup {
+  position: fixed;
+  bottom: -380px;
+  right: 1.5rem;
+  z-index: 1500;
+  width: 340px;
+  max-width: calc(100vw - 3rem);
+  background: var(--bg2);
+  border: 1px solid rgba(0,255,179,.35);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.65), 0 0 60px rgba(0,255,179,.12), 0 0 0 1px rgba(0,255,179,.08);
+  transition: bottom .55s cubic-bezier(.34,1.56,.64,1);
+  font-family: var(--ff);
+}
+#gift-popup.show { bottom: 5.5rem; }
+#gift-popup.hide {
+  bottom: -380px;
+  transition: bottom .35s ease-in;
+}
+
+.gp-bar {
+  height: 3px;
+  background: var(--grad3);
+  background-size: 400% 100%;
+  animation: flow 4s linear infinite;
+}
+
+.gp-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.1rem 1.25rem .6rem;
+  gap: .75rem;
+}
+.gp-emoji {
+  font-size: 2.2rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 12px rgba(0,255,179,.4));
+  animation: gp-bounce 2.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes gp-bounce {
+  0%,100%{transform:translateY(0) rotate(-4deg)}
+  50%{transform:translateY(-6px) rotate(4deg)}
+}
+.gp-title-wrap { flex: 1; }
+.gp-label {
+  font-family: var(--fc);
+  font-size: .58rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--g1);
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  margin-bottom: .2rem;
+}
+.gp-label-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--g1);
+  box-shadow: 0 0 8px var(--g1);
+  animation: pulse 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.gp-title {
+  font-family: var(--fm);
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: var(--text);
+  letter-spacing: -.02em;
+}
+.gp-title .gr {
+  background: var(--grad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Close = minimize, not destroy */
+.gp-close {
+  background: rgba(255,255,255,.07);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: .75rem;
+  transition: all .18s;
+  flex-shrink: 0;
+  position: relative;
+}
+.gp-close:hover { border-color: var(--g1); color: var(--g1); background: rgba(0,255,179,.1); }
+.gp-close-tooltip {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: var(--fc);
+  font-size: .55rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: .3rem .55rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s;
+}
+.gp-close:hover .gp-close-tooltip { opacity: 1; }
+
+.gp-body { padding: 0 1.25rem 1rem; }
+.gp-desc {
+  font-size: .82rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.gp-desc strong { color: var(--text); font-weight: 600; }
+
+.gp-gifts {
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  margin-bottom: 1.1rem;
+}
+.gp-gift {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: .55rem .85rem;
+  font-size: .8rem;
+  color: var(--text);
+  transition: border-color .18s;
+}
+.gp-gift:hover { border-color: rgba(0,255,179,.25); }
+.gp-gift-icon { font-size: 1rem; flex-shrink: 0; }
+.gp-gift-text { flex: 1; line-height: 1.45; }
+.gp-gift-text span {
+  display: block;
+  font-family: var(--fc);
+  font-size: .56rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--g1);
+  margin-bottom: .1rem;
+}
+
+.gp-urgency {
+  background: rgba(0,255,179,.06);
+  border: 1px solid rgba(0,255,179,.18);
+  border-radius: 8px;
+  padding: .5rem .85rem;
+  font-family: var(--fc);
+  font-size: .65rem;
+  color: var(--g1);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: 1rem;
+  letter-spacing: .04em;
+}
+
+.gp-cta { display: flex; gap: .6rem; }
+.gp-btn-main {
+  flex: 1;
+  background: var(--grad);
+  color: #07071a;
+  font-family: var(--fm);
+  font-weight: 800;
+  font-size: .82rem;
+  padding: .75rem 1rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  transition: all .2s;
+  letter-spacing: .01em;
+}
+.gp-btn-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,255,179,.35);
+}
+.gp-btn-see {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border2);
+  font-family: var(--fc);
+  font-size: .6rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: .75rem .9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .18s;
+  white-space: nowrap;
+}
+.gp-btn-see:hover { border-color: var(--g1); color: var(--g1); }
+
+.gp-slots {
+  text-align: center;
+  font-family: var(--fc);
+  font-size: .58rem;
+  color: var(--muted2);
+  letter-spacing: .06em;
+  margin-top: .65rem;
+  padding-bottom: .15rem;
+}
+.gp-slots strong { color: var(--muted); }
+</style>
+
+<!-- ── MINIMIZED TAB (shows after popup is first dismissed) ── -->
+<button id="gift-tab" onclick="expandGiftPopup()" aria-label="Claim your gift">
+  <span class="gift-tab-emoji">🎁</span>
+  <span class="gift-tab-text">Claim My Gift</span>
+</button>
+
+<!-- ── FULL POPUP ── -->
+<div id="gift-popup">
+  <div class="gp-bar"></div>
+  <div class="gp-head">
+    <div class="gp-emoji">🎁</div>
+    <div class="gp-title-wrap">
+      <div class="gp-label">
+        <span class="gp-label-dot"></span>
+        Exclusive Offer · This Month Only
+      </div>
+      <div class="gp-title">I have a <span class="gr">gift for you</span> if you hire me now</div>
+    </div>
+    <button class="gp-close" onclick="minimizeGiftPopup()" aria-label="Minimize">
+      —
+      <span class="gp-close-tooltip">minimize</span>
+    </button>
+  </div>
+
+  <div class="gp-body">
+    <p class="gp-desc">
+      Book your free call <strong>this month</strong> and unlock a full bonus package — on top of your AI automation system.
+    </p>
+
+    <div class="gp-gifts">
+      <div class="gp-gift">
+        <span class="gp-gift-icon">🌐</span>
+        <div class="gp-gift-text">
+          <span>Free gift #1</span>
+          A high-performance web app — built &amp; yours to keep
+        </div>
+      </div>
+      <div class="gp-gift">
+        <span class="gp-gift-icon">💰</span>
+        <div class="gp-gift-text">
+          <span>Free gift #2</span>
+          Early-bird discount locked in forever
+        </div>
+      </div>
+      <div class="gp-gift">
+        <span class="gp-gift-icon">⚡</span>
+        <div class="gp-gift-text">
+          <span>Free gift #3</span>
+          Priority build slot — delivered in 1–2 weeks
+        </div>
+      </div>
+    </div>
+
+    <div class="gp-urgency">
+      🔥 Only <strong style="margin:0 .2rem;font-weight:700">2 slots left</strong> this month — 3 of 5 already taken
+    </div>
+
+    <div class="gp-cta">
+      <button class="gp-btn-main" onclick="minimizeGiftPopup();openBook()">
+        ⚡ Claim My Gift
+      </button>
+      <button class="gp-btn-see" onclick="minimizeGiftPopup();document.getElementById('cta').scrollIntoView({behavior:'smooth'})">
+        See offer
+      </button>
+    </div>
+    <div class="gp-slots">
+      <strong>Jowie Flores</strong> · Flowres AI · Daet, Bicol PH
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var hasShown = false;
+
+  function showGiftPopup() {
+    if (hasShown) return;
+    hasShown = true;
+    var popup = document.getElementById('gift-popup');
+    var tab   = document.getElementById('gift-tab');
+    popup.classList.add('show');
+    // Hide the tab while popup is open
+    tab.classList.remove('visible');
+  }
+
+  function minimizeGiftPopup() {
+    var popup = document.getElementById('gift-popup');
+    var tab   = document.getElementById('gift-tab');
+    popup.classList.remove('show');
+    popup.classList.add('hide');
+    setTimeout(function() { popup.classList.remove('hide'); }, 400);
+    // Show the persistent minimized tab
+    tab.classList.add('visible');
+  }
+
+  function expandGiftPopup() {
+    var popup = document.getElementById('gift-popup');
+    var tab   = document.getElementById('gift-tab');
+    tab.classList.remove('visible');
+    popup.classList.add('show');
+  }
+
+  // Expose to global scope for onclick handlers
+  window.minimizeGiftPopup = minimizeGiftPopup;
+  window.expandGiftPopup   = expandGiftPopup;
+
+  // Show after 5 seconds
+  setTimeout(showGiftPopup, 5000);
+
+  // Exit-intent fallback (only if never shown)
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY <= 0 && !hasShown) showGiftPopup();
+  });
+})();
+</script>
 </body>
 </html>
